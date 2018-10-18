@@ -7,12 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 public class HomeController : Controller
 {
     [HttpGet("personal")]
-    public IActionResult GetPersonal()
+    public IActionResult GetPersonal(int userId, string login)
     {
-        ClaimsIdentity identity = HttpContext.User.Identity as ClaimsIdentity;
-        string nameIdentifier = identity.Claims.Where(c => c.Type == ClaimTypes.NameIdentifier).Select(c => c.Value).SingleOrDefault();
-
-        return Ok($"This is GetPersonal: ({nameIdentifier}) {User.Identity.Name}");
+        return Ok($"This is GetPersonal: ({userId}) {login}");
     }
 
     [Authorize, HttpGet("personal2")]
